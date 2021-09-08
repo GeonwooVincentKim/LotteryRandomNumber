@@ -52,11 +52,21 @@ class MainActivity : AppCompatActivity() {
 
         initRunButton()
         initAddButton()
+        initClearButton()
     }
 
     private fun initRunButton(): Unit{
         runButton.setOnClickListener{
             val list = getRandomNumber()
+
+            didRun = true
+
+            list.forEachIndexed{ index, number ->
+                val textView = numberTextViewList[index]
+
+                textView.text = number.toString()
+                textView.isVisible = true
+            }
 
             Log.d("MainActivity", list.toString());
         }
@@ -89,10 +99,26 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun initClearButton(){
+        clearButton.setOnClickListener{
+            pickNumberSet.clear()
+            numberTextViewList.forEach{
+                it.isVisible = false
+            }
+
+            didRun = false
+        }
+    }
+
     private fun getRandomNumber(): List<Int> {
         val numberList = mutableListOf<Int>()
             .apply {
                 for (i in 1..45) {
+                    // Exclude selected numbers
+                    if(pickNumberSet.contains(i)){
+                        continue
+                    }
+
                     this.add(i)
                 }
             }
@@ -103,20 +129,12 @@ class MainActivity : AppCompatActivity() {
         /*
             Extract the Number from numberList
             - The number that the random function gets
-            - It gets 6 Items from numberList
+            - It gets 6 Items from numberList (Maximum)
+            - It gets the number of items from numberList
+              it could be 0 Items, but get randomized number as the length of numberList
+            - Print Randomized number without users selection
         */
-        val newList = numberList.subList(0, 6)
-
-        /*
-        * Return sorted list
-        * */
-        /*
-        for (i in newList) {
-            if (!newList.equals(newList[i])) {
-                break;
-            }
-        }*/
-
+        val newList = pickNumberSet.toList() + numberList.subList(0, 6 - pickNumberSet.size)
         return newList.sorted();
     }
 }
