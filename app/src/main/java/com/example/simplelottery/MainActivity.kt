@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.NumberPicker
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.core.view.get
 import androidx.core.view.isVisible
 
@@ -15,19 +16,19 @@ class MainActivity : AppCompatActivity() {
         findViewById<Button>(R.id.clearButton)
     }
 
-    private val addButton: Button by lazy{
+    private val addButton: Button by lazy {
         findViewById<Button>(R.id.addButton)
     }
 
-    private val runButton: Button by lazy{
+    private val runButton: Button by lazy {
         findViewById<Button>(R.id.runButton)
     }
 
-    private val numberPicker: NumberPicker by lazy{
+    private val numberPicker: NumberPicker by lazy {
         findViewById<NumberPicker>(R.id.numberPicker)
     }
 
-    private val numberTextViewList: List<TextView> by lazy{
+    private val numberTextViewList: List<TextView> by lazy {
         listOf<TextView>(
             findViewById<TextView>(R.id.firstNumber),
             findViewById<TextView>(R.id.secondNumber),
@@ -55,37 +56,40 @@ class MainActivity : AppCompatActivity() {
         initClearButton()
     }
 
-    private fun initRunButton(): Unit{
-        runButton.setOnClickListener{
+    private fun initRunButton(): Unit {
+        runButton.setOnClickListener {
             val list = getRandomNumber()
 
             didRun = true
 
-            list.forEachIndexed{ index, number ->
+            list.forEachIndexed { index, number ->
                 val textView = numberTextViewList[index]
 
                 textView.text = number.toString()
                 textView.isVisible = true
+
+                backgroundColor(number, textView)
             }
 
             Log.d("MainActivity", list.toString());
         }
     }
 
-    private fun initAddButton(): Unit{
-        addButton.setOnClickListener{
+
+    private fun initAddButton(): Unit {
+        addButton.setOnClickListener {
             /* Before select Number */
-            if(didRun){
+            if (didRun) {
                 Toast.makeText(this, "초기화 후에 실행해주세요.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            if(pickNumberSet.size >= 5){
+            if (pickNumberSet.size >= 5) {
                 Toast.makeText(this, "번호는 5개까지만 선택할 수 있습니다.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            if(pickNumberSet.contains(numberPicker.value)){
+            if (pickNumberSet.contains(numberPicker.value)) {
                 Toast.makeText(this, "이미 선택한 번호입니다.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
@@ -95,18 +99,34 @@ class MainActivity : AppCompatActivity() {
             textView.isVisible = true
             textView.text = numberPicker.value.toString()
 
+            backgroundColor(numberPicker.value, textView)
+
             pickNumberSet.add(numberPicker.value)
         }
     }
 
-    private fun initClearButton(){
-        clearButton.setOnClickListener{
+    private fun initClearButton() {
+        clearButton.setOnClickListener {
             pickNumberSet.clear()
-            numberTextViewList.forEach{
+            numberTextViewList.forEach {
                 it.isVisible = false
             }
 
             didRun = false
+        }
+    }
+
+    private fun backgroundColor(number: Int, textView: TextView) {
+        when (number) {
+            in 1..10 -> textView.background =
+                ContextCompat.getDrawable(this, R.drawable.circle_blue)
+            in 11..20 -> textView.background =
+                ContextCompat.getDrawable(this, R.drawable.circle_green)
+            in 21..30 -> textView.background =
+                ContextCompat.getDrawable(this, R.drawable.circle_yellow)
+            in 31..40 -> textView.background =
+                ContextCompat.getDrawable(this, R.drawable.circle_red)
+            else -> textView.background = ContextCompat.getDrawable(this, R.drawable.circle_plum)
         }
     }
 
@@ -115,7 +135,7 @@ class MainActivity : AppCompatActivity() {
             .apply {
                 for (i in 1..45) {
                     // Exclude selected numbers
-                    if(pickNumberSet.contains(i)){
+                    if (pickNumberSet.contains(i)) {
                         continue
                     }
 
