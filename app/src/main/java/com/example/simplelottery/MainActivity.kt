@@ -5,8 +5,10 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.NumberPicker
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.get
+import androidx.core.view.isVisible
 
 class MainActivity : AppCompatActivity() {
     private val clearButton: Button by lazy {
@@ -23,6 +25,17 @@ class MainActivity : AppCompatActivity() {
 
     private val numberPicker: NumberPicker by lazy{
         findViewById<NumberPicker>(R.id.numberPicker)
+    }
+
+    private val numberTextViewList: List<TextView> by lazy{
+        listOf<TextView>(
+            findViewById<TextView>(R.id.firstNumber),
+            findViewById<TextView>(R.id.secondNumber),
+            findViewById<TextView>(R.id.thirdNumber),
+            findViewById<TextView>(R.id.fourthNumber),
+            findViewById<TextView>(R.id.fifthNumber),
+            findViewById<TextView>(R.id.sixthNumber),
+        );
     }
 
     private var didRun = false;
@@ -68,7 +81,11 @@ class MainActivity : AppCompatActivity() {
             }
 
             /* After Select Number */
+            val textView = numberTextViewList[pickNumberSet.size];
+            textView.isVisible = true
+            textView.text = numberPicker.value.toString()
 
+            pickNumberSet.add(numberPicker.value)
         }
     }
 
