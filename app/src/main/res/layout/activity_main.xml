@@ -51,66 +51,84 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:visibility="gone"
-            tools:visibility="visible"
+            android:background="@drawable/circle_blue"
+            android:gravity="center"
             android:text="@string/displayNumber"
+            android:textColor="@color/white"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:visibility="gone"
+            tools:visibility="visible" />
 
         <TextView
             android:id="@+id/secondNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:visibility="gone"
-            tools:visibility="visible"
+            android:background="@drawable/circle_yellow"
+            android:gravity="center"
             android:text="@string/displayNumber"
+            android:textColor="@color/white"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:visibility="gone"
+            tools:visibility="visible" />
 
         <TextView
             android:id="@+id/thirdNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:visibility="gone"
-            tools:visibility="visible"
+            android:background="@drawable/circle_red"
+            android:gravity="center"
             android:text="@string/displayNumber"
+            android:textColor="@color/white"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:visibility="gone"
+            tools:visibility="visible" />
 
         <TextView
             android:id="@+id/fourthNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:visibility="gone"
-            tools:visibility="visible"
+            android:background="@drawable/circle_green"
+            android:gravity="center"
             android:text="@string/displayNumber"
+            android:textColor="@color/white"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:visibility="gone"
+            tools:visibility="visible" />
 
         <TextView
             android:id="@+id/fifthNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:visibility="gone"
-            tools:visibility="visible"
+            android:background="@drawable/circle_grey"
+            android:gravity="center"
             android:text="@string/displayNumber"
+            android:textColor="@color/white"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:visibility="gone"
+            tools:visibility="visible" />
 
         <TextView
             android:id="@+id/sixthNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:visibility="gone"
-            tools:visibility="visible"
+            android:background="@drawable/circle_plum"
+            android:gravity="center"
             android:text="@string/displayNumber"
+            android:textColor="@color/white"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:visibility="gone"
+            tools:visibility="visible" />
     </LinearLayout>
 
     <Button
