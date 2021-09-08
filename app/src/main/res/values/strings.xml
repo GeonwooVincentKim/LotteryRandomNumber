@@ -2,4 +2,6 @@
     <string name="app_name">SimpleLottery</string>
     <string name="AddButton">번호 추가하기</string>
     <string name="InitializeNumber">초기화</string>
+    <string name="startButton">자동 생성 시작</string>
+    <string name="displayNumber">1</string>
 </resources>
