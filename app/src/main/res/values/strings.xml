@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">SimpleLottery</string>
+    <string name="AddButton">번호 추가하기</string>
+    <string name="InitializeNumber">초기화</string>
 </resources>
