@@ -1,8 +1,12 @@
 package com.example.simplelottery
 
+import android.annotation.SuppressLint
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.NumberPicker
 import android.widget.TextView
@@ -11,7 +15,10 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.get
 import androidx.core.view.isVisible
 
+
 class MainActivity : AppCompatActivity() {
+    private val sharedPrefFile = "kotlinsharedpreference"
+
     private val clearButton: Button by lazy {
         findViewById<Button>(R.id.clearButton)
     }
@@ -39,10 +46,15 @@ class MainActivity : AppCompatActivity() {
         );
     }
 
+    private val saveButton: Button by lazy{
+        findViewById<Button>(R.id.saveButton)
+    }
+
     private var didRun = false;
 
     private var pickNumberSet = hashSetOf<Int>()
 
+//    private var sharePreferences: SharedPreferences = this.getSharedPreferences(sharedPrefFile, Context.MODE_PRIVATE)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,6 +65,7 @@ class MainActivity : AppCompatActivity() {
 
         initRunButton()
         initAddButton()
+        saveButton()
         initClearButton()
     }
 
@@ -116,6 +129,41 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+//    @SuppressLint("CommitPrefEdits")
+    private fun saveButton(): Unit{
+        saveButton.setOnClickListener{
+            val list = getRandomNumber()
+
+            didRun = true
+
+            list.forEachIndexed { index, number ->
+                val textView = numberTextViewList[index]
+
+                textView.text = number.toString()
+                textView.isVisible = true
+
+                backgroundColor(number, textView)
+            }
+
+            Log.d("MainActivity", list.toString());
+
+//            Contact
+//            val userLocalData = this.getSharedPreferences(shared)
+//            val editor: SharedPreferences.Editor = sharePreferences.edit()
+//            val separator = ","
+//            val getAsString = list.joinToString(separator)
+//            editor.putString("numberList", getAsString)
+//            editor.apply()
+        }
+//
+//        saveButton.setOnClickListener{
+////            var list = saveRandomList()
+//            val saveList = numberTextViewList;
+//            Log.d("MainActivity", saveList.toString());
+//        }
+    }
+
+
     private fun backgroundColor(number: Int, textView: TextView) {
         when (number) {
             in 1..10 -> textView.background =
@@ -157,4 +205,10 @@ class MainActivity : AppCompatActivity() {
         val newList = pickNumberSet.toList() + numberList.subList(0, 6 - pickNumberSet.size)
         return newList.sorted();
     }
+
+//    private fun saveRandomList(): List<Int>{
+//        var numberList =
+//    }
+
+//    private fun
 }
