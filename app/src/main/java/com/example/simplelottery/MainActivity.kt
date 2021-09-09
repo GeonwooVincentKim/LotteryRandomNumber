@@ -60,6 +60,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+
         numberPicker.minValue = 1
         numberPicker.maxValue = 45
 
@@ -130,8 +131,12 @@ class MainActivity : AppCompatActivity() {
     }
 
 //    @SuppressLint("CommitPrefEdits")
+    @SuppressLint("CommitPrefEdits")
     private fun saveButton(): Unit{
         saveButton.setOnClickListener{
+            val sharedPreferences: SharedPreferences = this.getSharedPreferences(sharedPrefFile,
+                Context.MODE_PRIVATE)
+
             val list = getRandomNumber()
 
             didRun = true
@@ -149,11 +154,14 @@ class MainActivity : AppCompatActivity() {
 
 //            Contact
 //            val userLocalData = this.getSharedPreferences(shared)
-//            val editor: SharedPreferences.Editor = sharePreferences.edit()
-//            val separator = ","
-//            val getAsString = list.joinToString(separator)
-//            editor.putString("numberList", getAsString)
-//            editor.apply()
+//            val editor = sharedPreferences.edit()
+            val editor: SharedPreferences.Editor = sharedPreferences.edit()
+            val separator = ","
+            val getAsString = list.joinToString(separator)
+            editor.putString("numberList", getAsString)
+            editor.apply()
+
+//            val outputName = findViewById<TextView>(R.id.numberPicker)
         }
 //
 //        saveButton.setOnClickListener{
